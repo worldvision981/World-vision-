@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Hope | Lee Junho Fandom Impact</title>
+    <style>
+        :root { --wv-orange: #ff6d00; --text-dark: #333333; --bg-gray: #f8f9fa; --trust-gray: #999; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.8; color: var(--text-dark); margin: 0; padding: 0; }
+        
+        .corner-banner { position: absolute; top: 0; left: 0; width: 220px; z-index: 1001; }
+        nav { background: #fff; padding: 10px 5%; display: flex; justify-content: flex-end; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 1000; height: 110px; }
+        
+        .donate-group { display: flex; flex-direction: column; align-items: center; margin-top: 10px; }
+        .circular-text-svg { width: 90px; height: 90px; margin-bottom: -15px; }
+        .circular-text-svg text { font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; fill: var(--wv-orange); }
+        
+        .btn-donate { background: var(--wv-orange); color: #fff !important; padding: 10px 25px; border-radius: 4px; cursor: pointer; border: none; font-weight: bold; transition: 0.3s; text-decoration: none; }
+        .btn-donate:hover { background: #e66200; }
+
+        .article-header { max-width: 800px; margin: 60px auto 30px; text-align: center; padding: 0 20px; }
+        h1 { font-size: 2.8rem; line-height: 1.2; margin-bottom: 10px; }
+        
+        /* --- PROGRESS BAR --- */
+        .progress-container { max-width: 600px; margin: 0 auto 40px; padding: 0 20px; }
+        .progress-label { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.9rem; margin-bottom: 8px; }
+        .progress-bg { background: #eee; height: 12px; border-radius: 10px; overflow: hidden; }
+        .progress-fill { background: var(--wv-orange); height: 100%; width: 64%; /* UPDATE THIS PERCENTAGE */ transition: 1s ease-in-out; }
+
+        .featured-image { width: 100%; max-width: 800px; display: block; margin: 0 auto 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .content-container { max-width: 750px; margin: 0 auto 60px; padding: 0 20px; }
+        .dropcap { float: left; font-size: 4rem; line-height: 1; padding-right: 12px; color: var(--wv-orange); font-weight: bold; }
+        
+        /* --- MODAL --- */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: #fff; padding: 40px; width: 90%; max-width: 500px; border-radius: 12px; position: relative; max-height: 90vh; overflow-y: auto; }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; }
+        .hidden { display: none; }
+        
+        /* --- SPONSORSHIP PACKAGE LIST --- */
+        .package-list { background: var(--bg-gray); padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 0.85rem; }
+        .package-list ul { padding-left: 20px; margin: 5px 0; }
+
+        label { display: block; margin: 15px 0 5px; font-weight: bold; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; margin-bottom: 10px; }
+        .action-btn { background: var(--wv-orange); color: white; border: none; width: 100%; padding: 18px; margin-top: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        
+        /* --- TRUST BADGES --- */
+        .trust-badges { display: flex; justify-content: center; gap: 30px; margin-top: 40px; filter: grayscale(100%); opacity: 0.6; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; color: var(--trust-gray); }
+        .badge-item { display: flex; flex-direction: column; align-items: center; }
+        .badge-icon { font-size: 1.5rem; margin-bottom: 5px; }
+
+        footer { background: #222; color: #fff; padding: 60px 20px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<img src="Screenshot_20260408-193148.png" alt="Banner" class="corner-banner">
+
+<nav>
+    <div class="donate-group">
+        <svg class="circular-text-svg" viewBox="0 0 100 100">
+            <defs><path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" /></defs>
+            <text><textPath xlink:href="#circlePath">Hope Joy Justice</textPath></text>
+        </svg>
+        <button class="btn-donate" onclick="openModal()">Donate Now</button>
+    </div>
+</nav>
+
+<header class="article-header">
+    <span style="color:var(--wv-orange); font-weight:bold; text-transform:uppercase; letter-spacing: 1px;">Global Community Impact</span>
+    <h1>Lee Junho Fandom Rises to the Occasion to Help Transform Children's Lives Worldwide</h1>
+</header>
+
+<div class="progress-container">
+    <div class="progress-label">
+        <span>Raised: $6,400</span>
+        <span>Goal: $10,000</span>
+    </div>
+    <div class="progress-bg">
+        <div class="progress-fill"></div>
+    </div>
+</div>
+
+<img src="1772889370017.jpg" alt="Lee Junho Impact" class="featured-image">
+
+<main class="content-container">
+    <p><span class="dropcap">W</span>hat started as a celebration of a beloved artist has blossomed into a global movement of compassion. Members of the Lee Junho fandom have come together to support a shared mission: ensuring every child has the opportunity to thrive.</p>
+    <div style="text-align: center; margin-top: 40px;">
+        <button class="btn-donate" style="padding: 15px 40px; font-size: 1.1rem;" onclick="openModal()">Sponsor a Child Today</button>
+    </div>
+</main>
+
+<div class="modal-overlay" id="donationModal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        
+        <div id="step-reasons">
+            <h2 style="color:var(--wv-orange); margin-top:0;">Why Sponsor?</h2>
+            <p>Your $300+ gift provides clean water, school supplies, and life-saving healthcare for a child in need.</p>
+            
+            <div class="package-list">
+                <strong>Your Digital Welcome Kit includes:</strong>
+                <ul>
+                    <li>Personalized Certificate of Appreciation</li>
+                    <li>Detailed Community Impact Profile</li>
+                    <li>Quarterly Growth & Health Reports</li>
+                    <li>Fandom Community Badge</li>
+                </ul>
+            </div>
+            
+            <button class="action-btn" onclick="showForm()">Proceed to Donation Form</button>
+        </div>
+
+        <div id="step-form" class="hidden">
+            <h2 style="color:var(--wv-orange); margin-top:0;">Sponsorship Details</h2>
+            <form id="sponsorship-form">
+                <input type="text" name="name" placeholder="Full Name" required data-fs-field>
+                <input type="email" name="email" placeholder="Email Address" required data-fs-field>
+                <input type="text" name="country" placeholder="Country" required data-fs-field>
+                <input type="number" name="amount" min="300" placeholder="Amount (Min $300)" required data-fs-field>
+                <select name="payment_method" required data-fs-field>
+                    <option value="Apple Card">Apple Card</option>
+                    <option value="Apple Pay">Apple Pay</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                </select>
+                <button type="submit" class="action-btn" data-fs-submit-btn>Submit Sponsorship</button>
+                <div id="success-msg" data-fs-success style="display:none; color:green; text-align:center; font-weight:bold; margin-top:15px;">Success! Please check your email for your Welcome Kit shortly.</div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="trust-badges">
+        <div class="badge-item"><span class="badge-icon">🔒</span><span>Secure Payment</span></div>
+        <div class="badge-item"><span class="badge-icon">🌍</span><span>Global Reach</span></div>
+        <div class="badge-item"><span class="badge-icon">⭐</span><span>Fandom Verified</span></div>
+    </div>
+    <p style="margin-top:40px;">&copy; 2026 Global Hope International. All rights reserved.</p>
+</footer>
+
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+<script>
+    function openModal() { document.getElementById('donationModal').style.display = 'flex'; }
+    function closeModal() { document.getElementById('donationModal').style.display = 'none'; }
+    function showForm() {
+        document.getElementById('step-reasons').classList.add('hidden');
+        document.getElementById('step-form').classList.remove('hidden');
+    }
+    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+    document.addEventListener('DOMContentLoaded', function() {
+        formspree('initForm', { 
+            formElement: '#sponsorship-form', 
+            formId: 'xdkwlwlj',
+            onSuccess: function() {
+                document.getElementById('success-msg').style.display = 'block';
+                setTimeout(closeModal, 4000);
+            }
+        });
+    });
+</script>
+</body>
+</html>
