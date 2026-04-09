@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,23 +21,22 @@
         .article-header { max-width: 800px; margin: 60px auto 30px; text-align: center; padding: 0 20px; }
         h1 { font-size: 2.8rem; line-height: 1.2; margin-bottom: 10px; }
         
-        /* --- PROGRESS BAR --- */
         .progress-container { max-width: 600px; margin: 0 auto 40px; padding: 0 20px; }
         .progress-label { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.9rem; margin-bottom: 8px; }
         .progress-bg { background: #eee; height: 12px; border-radius: 10px; overflow: hidden; }
-        .progress-fill { background: var(--wv-orange); height: 100%; width: 64%; /* UPDATE THIS PERCENTAGE */ transition: 1s ease-in-out; }
+        .progress-fill { background: var(--wv-orange); height: 100%; width: 64%; transition: 1s ease-in-out; }
 
         .featured-image { width: 100%; max-width: 800px; display: block; margin: 0 auto 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .content-container { max-width: 750px; margin: 0 auto 60px; padding: 0 20px; }
         .dropcap { float: left; font-size: 4rem; line-height: 1; padding-right: 12px; color: var(--wv-orange); font-weight: bold; }
         
-        /* --- MODAL --- */
+        .quote-box { border-left: 4px solid var(--wv-orange); padding: 20px 30px; background: var(--bg-gray); margin: 30px 0; font-style: italic; font-size: 1.2rem; }
+
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; }
         .modal-content { background: #fff; padding: 40px; width: 90%; max-width: 500px; border-radius: 12px; position: relative; max-height: 90vh; overflow-y: auto; }
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; }
         .hidden { display: none; }
         
-        /* --- SPONSORSHIP PACKAGE LIST --- */
         .package-list { background: var(--bg-gray); padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 0.85rem; }
         .package-list ul { padding-left: 20px; margin: 5px 0; }
 
@@ -46,7 +44,6 @@
         input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; margin-bottom: 10px; }
         .action-btn { background: var(--wv-orange); color: white; border: none; width: 100%; padding: 18px; margin-top: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; }
         
-        /* --- TRUST BADGES --- */
         .trust-badges { display: flex; justify-content: center; gap: 30px; margin-top: 40px; filter: grayscale(100%); opacity: 0.6; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; color: var(--trust-gray); }
         .badge-item { display: flex; flex-direction: column; align-items: center; }
         .badge-icon { font-size: 1.5rem; margin-bottom: 5px; }
@@ -86,7 +83,19 @@
 <img src="1772889370017.jpg" alt="Lee Junho Impact" class="featured-image">
 
 <main class="content-container">
-    <p><span class="dropcap">W</span>hat started as a celebration of a beloved artist has blossomed into a global movement of compassion. Members of the Lee Junho fandom have come together to support a shared mission: ensuring every child has the opportunity to thrive.</p>
+    <p><span class="dropcap">W</span>hat started as a celebration of a beloved artist has blossomed into a global movement of compassion. Members of the Lee Junho fandom have come together across international borders to support a shared mission: ensuring every child, regardless of where they are born, has the opportunity to thrive.</p>
+
+    <p>The collective effort has raised significant funds to provide clean water, nutrition, and education to vulnerable communities. By focusing on global outreach, the fandom has shown that the bond between an artist and their fans can transcend entertainment and become a powerful force for social good.</p>
+
+    <div class="quote-box">
+        "Our goal was to reflect the kindness we see in Lee Junho by extending a helping hand to children across every continent. Kindness knows no borders."
+    </div>
+
+    <h3>A Global Vision for the Future</h3>
+    <p>Unlike localized efforts, this initiative addresses systemic issues on a worldwide scale. From providing emergency relief in conflict zones to supporting long-term educational infrastructure in developing nations, the fandom’s contribution is making a tangible difference in the lives of thousands of children globally.</p>
+
+    <p>The success of this campaign highlights the growing trend of "fan activism," where digital communities organize to tackle global challenges like poverty and health inequality.</p>
+    
     <div style="text-align: center; margin-top: 40px;">
         <button class="btn-donate" style="padding: 15px 40px; font-size: 1.1rem;" onclick="openModal()">Sponsor a Child Today</button>
     </div>
@@ -98,7 +107,7 @@
         
         <div id="step-reasons">
             <h2 style="color:var(--wv-orange); margin-top:0;">Why Sponsor?</h2>
-            <p>Your $300+ gift provides clean water, school supplies, and life-saving healthcare for a child in need.</p>
+            <p>Your contribution funds solar-powered wells, school supplies, fortified meals, and mobile clinics.</p>
             
             <div class="package-list">
                 <strong>Your Digital Welcome Kit includes:</strong>
