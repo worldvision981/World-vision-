@@ -125,11 +125,11 @@
         <div id="step-form" class="hidden">
             <h2 style="color:var(--wv-orange); margin-top:0;">Sponsorship Details</h2>
             <form id="sponsorship-form" action="https://formspree.io/f/xdkwlwlj" method="POST">
-                <input type="text" name="name" placeholder="Full Name" required>
-                <input type="email" name="email" placeholder="Email Address" required>
-                <input type="text" name="country" placeholder="Country" required>
-                <input type="number" name="amount" min="300" placeholder="Amount (Min $300)" required>
-                <select name="payment_method" required>
+                <input type="text" name="full_name" placeholder="Full Name" required>
+                <input type="email" name="email_address" placeholder="Email Address" required>
+                <input type="text" name="donor_country" placeholder="Country" required>
+                <input type="number" name="donation_amount" min="300" placeholder="Amount (Min $300)" required>
+                <select name="payment_type" required>
                     <option value="" disabled selected>Select Payment Method</option>
                     <option value="Apple Card">Apple Card</option>
                     <option value="Apple Pay">Apple Pay</option>
@@ -167,12 +167,19 @@
         button.disabled = true;
         button.innerText = 'Sending...';
 
+        // Prepare data as a JSON object
         const data = new FormData(form);
+        const jsonData = {};
+        data.forEach((value, key) => { jsonData[key] = value; });
+
         try {
             const response = await fetch(form.action, {
                 method: 'POST',
-                body: data,
-                headers: { 'Accept': 'application/json' }
+                body: JSON.stringify(jsonData),
+                headers: { 
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
             });
             
             if (response.ok) {
@@ -182,13 +189,15 @@
             } else {
                 const errorData = await response.json();
                 if (errorData.errors) {
-                    alert("Formspree says: " + errorData.errors.map(err => err.message).join(", "));
+                    // Joins the error field and message (e.g., "full_name is missing")
+                    const exactErrors = errorData.errors.map(err => err.field + " " + err.message).join(", ");
+                    alert("Formspree says: " + exactErrors);
                 } else {
                     alert("Error " + response.status + ": Could not connect to Formspree properly.");
                 }
             }
         } catch (error) {
-            alert('Error connecting. Please check your internet.');
+            alert('Error connecting. Please check your internet connection.');
         } finally {
             button.disabled = false;
             button.innerText = 'Submit Sponsorship';
