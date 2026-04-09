@@ -7,47 +7,34 @@
     <style>
         :root { --wv-orange: #ff6d00; --text-dark: #333333; --bg-gray: #f8f9fa; --trust-gray: #999; }
         body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.8; color: var(--text-dark); margin: 0; padding: 0; }
-        
         .corner-banner { position: absolute; top: 0; left: 0; width: 220px; z-index: 1001; }
         nav { background: #fff; padding: 10px 5%; display: flex; justify-content: flex-end; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 1000; height: 110px; }
-        
         .donate-group { display: flex; flex-direction: column; align-items: center; margin-top: 10px; }
         .circular-text-svg { width: 90px; height: 90px; margin-bottom: -15px; }
         .circular-text-svg text { font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; fill: var(--wv-orange); }
-        
         .btn-donate { background: var(--wv-orange); color: #fff !important; padding: 10px 25px; border-radius: 4px; cursor: pointer; border: none; font-weight: bold; transition: 0.3s; text-decoration: none; }
         .btn-donate:hover { background: #e66200; }
-
         .article-header { max-width: 800px; margin: 60px auto 30px; text-align: center; padding: 0 20px; }
         h1 { font-size: 2.8rem; line-height: 1.2; margin-bottom: 10px; }
-        
         .progress-container { max-width: 600px; margin: 0 auto 40px; padding: 0 20px; }
         .progress-label { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.9rem; margin-bottom: 8px; }
         .progress-bg { background: #eee; height: 12px; border-radius: 10px; overflow: hidden; }
         .progress-fill { background: var(--wv-orange); height: 100%; width: 64%; transition: 1s ease-in-out; }
-
         .featured-image { width: 100%; max-width: 800px; display: block; margin: 0 auto 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .content-container { max-width: 750px; margin: 0 auto 60px; padding: 0 20px; }
         .dropcap { float: left; font-size: 4rem; line-height: 1; padding-right: 12px; color: var(--wv-orange); font-weight: bold; }
-        
         .quote-box { border-left: 4px solid var(--wv-orange); padding: 20px 30px; background: var(--bg-gray); margin: 30px 0; font-style: italic; font-size: 1.2rem; }
-
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; }
         .modal-content { background: #fff; padding: 40px; width: 90%; max-width: 500px; border-radius: 12px; position: relative; max-height: 90vh; overflow-y: auto; }
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; }
         .hidden { display: none; }
-        
         .package-list { background: var(--bg-gray); padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 0.85rem; }
         .package-list ul { padding-left: 20px; margin: 5px 0; }
-
-        label { display: block; margin: 15px 0 5px; font-weight: bold; }
         input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; margin-bottom: 10px; }
         .action-btn { background: var(--wv-orange); color: white; border: none; width: 100%; padding: 18px; margin-top: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; }
-        
         .trust-badges { display: flex; justify-content: center; gap: 30px; margin-top: 40px; filter: grayscale(100%); opacity: 0.6; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; color: var(--trust-gray); }
         .badge-item { display: flex; flex-direction: column; align-items: center; }
         .badge-icon { font-size: 1.5rem; margin-bottom: 5px; }
-
         footer { background: #222; color: #fff; padding: 60px 20px; text-align: center; }
     </style>
 </head>
@@ -84,18 +71,11 @@
 
 <main class="content-container">
     <p><span class="dropcap">W</span>hat started as a celebration of a beloved artist has blossomed into a global movement of compassion. Members of the Lee Junho fandom have come together across international borders to support a shared mission: ensuring every child, regardless of where they are born, has the opportunity to thrive.</p>
-
     <p>The collective effort has raised significant funds to provide clean water, nutrition, and education to vulnerable communities. By focusing on global outreach, the fandom has shown that the bond between an artist and their fans can transcend entertainment and become a powerful force for social good.</p>
-
-    <div class="quote-box">
-        "Our goal was to reflect the kindness we see in Lee Junho by extending a helping hand to children across every continent. Kindness knows no borders."
-    </div>
-
+    <div class="quote-box">"Our goal was to reflect the kindness we see in Lee Junho by extending a helping hand to children across every continent. Kindness knows no borders."</div>
     <h3>A Global Vision for the Future</h3>
     <p>Unlike localized efforts, this initiative addresses systemic issues on a worldwide scale. From providing emergency relief in conflict zones to supporting long-term educational infrastructure in developing nations, the fandom’s contribution is making a tangible difference in the lives of thousands of children globally.</p>
-
     <p>The success of this campaign highlights the growing trend of "fan activism," where digital communities organize to tackle global challenges like poverty and health inequality.</p>
-    
     <div style="text-align: center; margin-top: 40px;">
         <button class="btn-donate" style="padding: 15px 40px; font-size: 1.1rem;" onclick="openModal()">Sponsor a Child Today</button>
     </div>
@@ -104,11 +84,9 @@
 <div class="modal-overlay" id="donationModal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal()">&times;</span>
-        
         <div id="step-reasons">
             <h2 style="color:var(--wv-orange); margin-top:0;">Why Sponsor?</h2>
             <p>Your contribution funds solar-powered wells, school supplies, fortified meals, and mobile clinics.</p>
-            
             <div class="package-list">
                 <strong>Your Digital Welcome Kit includes:</strong>
                 <ul>
@@ -118,7 +96,6 @@
                     <li>Fandom Community Badge</li>
                 </ul>
             </div>
-            
             <button class="action-btn" onclick="showForm()">Proceed to Donation Form</button>
         </div>
 
@@ -126,17 +103,17 @@
             <h2 style="color:var(--wv-orange); margin-top:0;">Sponsorship Details</h2>
             <form id="sponsorship-form" action="https://formspree.io/f/xdkwlwlj" method="POST">
                 <input type="text" name="full_name" placeholder="Full Name" required>
-                <input type="email" name="email_address" placeholder="Email Address" required>
-                <input type="text" name="donor_country" placeholder="Country" required>
-                <input type="number" name="donation_amount" min="300" placeholder="Amount (Min $300)" required>
-                <select name="payment_type" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="text" name="country" placeholder="Country" required>
+                <input type="number" name="amount" min="300" placeholder="Amount (Min $300)" required>
+                <select name="payment_method" required>
                     <option value="" disabled selected>Select Payment Method</option>
                     <option value="Apple Card">Apple Card</option>
                     <option value="Apple Pay">Apple Pay</option>
                     <option value="Bank Transfer">Bank Transfer</option>
                 </select>
-                <button type="submit" class="action-btn">Submit Sponsorship</button>
-                <div id="success-msg" style="display:none; color:green; text-align:center; font-weight:bold; margin-top:15px;">Success! Please check your email for your Welcome Kit shortly.</div>
+                <button type="submit" class="action-btn" id="submit-btn">Submit Sponsorship</button>
+                <div id="success-msg" style="display:none; color:green; text-align:center; font-weight:bold; margin-top:15px;">Success! Please check your email shortly.</div>
             </form>
         </div>
     </div>
@@ -160,47 +137,43 @@
     }
 
     const form = document.getElementById('sponsorship-form');
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener("submit", async function(e) {
         e.preventDefault();
-        const button = form.querySelector('button');
+        const button = document.getElementById('submit-btn');
         const successMsg = document.getElementById('success-msg');
+        
         button.disabled = true;
-        button.innerText = 'Sending...';
+        button.innerText = "Sending...";
 
-        // Prepare data as a JSON object
-        const data = new FormData(form);
-        const jsonData = {};
-        data.forEach((value, key) => { jsonData[key] = value; });
+        const formData = new FormData(form);
+        const object = {};
+        formData.forEach((value, key) => object[key] = value);
+        const json = JSON.stringify(object);
 
         try {
             const response = await fetch(form.action, {
-                method: 'POST',
-                body: JSON.stringify(jsonData),
-                headers: { 
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                body: json
             });
-            
+
             if (response.ok) {
-                successMsg.style.display = 'block';
+                successMsg.style.display = "block";
                 form.reset();
-                setTimeout(closeModal, 4000);
+                setTimeout(closeModal, 3000);
             } else {
-                const errorData = await response.json();
-                if (errorData.errors) {
-                    // Joins the error field and message (e.g., "full_name is missing")
-                    const exactErrors = errorData.errors.map(err => err.field + " " + err.message).join(", ");
-                    alert("Formspree says: " + exactErrors);
+                const data = await response.json();
+                if (data.errors) {
+                    alert(data.errors.map(error => error.message).join(", "));
                 } else {
-                    alert("Error " + response.status + ": Could not connect to Formspree properly.");
+                    alert("Submission failed. Please try again.");
                 }
             }
         } catch (error) {
-            alert('Error connecting. Please check your internet connection.');
+            alert("Error connecting. Please check your internet.");
         } finally {
             button.disabled = false;
-            button.innerText = 'Submit Sponsorship';
+            button.innerText = "Submit Sponsorship";
         }
     });
 </script>
