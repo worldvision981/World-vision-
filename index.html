@@ -25,13 +25,13 @@
         .dropcap { float: left; font-size: 4rem; line-height: 1; padding-right: 12px; color: var(--wv-orange); font-weight: bold; }
         .quote-box { border-left: 4px solid var(--wv-orange); padding: 20px 30px; background: var(--bg-gray); margin: 30px 0; font-style: italic; font-size: 1.2rem; }
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-content { background: #fff; padding: 40px; width: 90%; max-width: 500px; border-radius: 12px; position: relative; max-height: 90vh; overflow-y: auto; }
+        .modal-content { background: #fff; padding: 40px; width: 90%; max-width: 500px; border-radius: 12px; position: relative; max-height: 90vh; overflow-y: auto; text-align: center; }
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; }
         .hidden { display: none; }
-        .package-list { background: var(--bg-gray); padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 0.85rem; }
+        .package-list { background: var(--bg-gray); padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 0.85rem; text-align: left; }
         .package-list ul { padding-left: 20px; margin: 5px 0; }
-        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; margin-bottom: 10px; }
-        .action-btn { background: var(--wv-orange); color: white; border: none; width: 100%; padding: 18px; margin-top: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; margin-bottom: 10px; font-size: 16px; }
+        .action-btn { background: var(--wv-orange); color: white; border: none; width: 100%; padding: 18px; margin-top: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; }
         .trust-badges { display: flex; justify-content: center; gap: 30px; margin-top: 40px; filter: grayscale(100%); opacity: 0.6; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; color: var(--trust-gray); }
         .badge-item { display: flex; flex-direction: column; align-items: center; }
         .badge-icon { font-size: 1.5rem; margin-bottom: 5px; }
@@ -70,113 +70,5 @@
 <img src="1772889370017.jpg" alt="Lee Junho Impact" class="featured-image">
 
 <main class="content-container">
-    <p><span class="dropcap">W</span>hat started as a celebration of a beloved artist has blossomed into a global movement of compassion. Members of the Lee Junho fandom have come together across international borders to support a shared mission: ensuring every child, regardless of where they are born, has the opportunity to thrive.</p>
-    <p>The collective effort has raised significant funds to provide clean water, nutrition, and education to vulnerable communities. By focusing on global outreach, the fandom has shown that the bond between an artist and their fans can transcend entertainment and become a powerful force for social good.</p>
-    <div class="quote-box">"Our goal was to reflect the kindness we see in Lee Junho by extending a helping hand to children across every continent. Kindness knows no borders."</div>
-    <h3>A Global Vision for the Future</h3>
-    <p>Unlike localized efforts, this initiative addresses systemic issues on a worldwide scale. From providing emergency relief in conflict zones to supporting long-term educational infrastructure in developing nations, the fandom’s contribution is making a tangible difference in the lives of thousands of children globally.</p>
-    <p>The success of this campaign highlights the growing trend of "fan activism," where digital communities organize to tackle global challenges like poverty and health inequality.</p>
-    <div style="text-align: center; margin-top: 40px;">
-        <button class="btn-donate" style="padding: 15px 40px; font-size: 1.1rem;" onclick="openModal()">Sponsor a Child Today</button>
-    </div>
-</main>
-
-<div class="modal-overlay" id="donationModal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <div id="step-reasons">
-            <h2 style="color:var(--wv-orange); margin-top:0;">Why Sponsor?</h2>
-            <p>Your contribution funds solar-powered wells, school supplies, fortified meals, and mobile clinics.</p>
-            <div class="package-list">
-                <strong>Your Digital Welcome Kit includes:</strong>
-                <ul>
-                    <li>Personalized Certificate of Appreciation</li>
-                    <li>Detailed Community Impact Profile</li>
-                    <li>Quarterly Growth & Health Reports</li>
-                    <li>Fandom Community Badge</li>
-                </ul>
-            </div>
-            <button class="action-btn" onclick="showForm()">Proceed to Donation Form</button>
-        </div>
-
-        <div id="step-form" class="hidden">
-            <h2 style="color:var(--wv-orange); margin-top:0;">Sponsorship Details</h2>
-            <form id="sponsorship-form" action="https://formspree.io/f/xdkwlwlj" method="POST">
-                <input type="text" name="full_name" placeholder="Full Name" required>
-                <input type="email" name="email" placeholder="Email Address" required>
-                <input type="text" name="country" placeholder="Country" required>
-                <input type="number" name="amount" min="300" placeholder="Amount (Min $300)" required>
-                <select name="payment_method" required>
-                    <option value="" disabled selected>Select Payment Method</option>
-                    <option value="Apple Card">Apple Card</option>
-                    <option value="Apple Pay">Apple Pay</option>
-                    <option value="Bank Transfer">Bank Transfer</option>
-                </select>
-                <button type="submit" class="action-btn" id="submit-btn">Submit Sponsorship</button>
-                <div id="success-msg" style="display:none; color:green; text-align:center; font-weight:bold; margin-top:15px;">Success! Please check your email shortly.</div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<footer>
-    <div class="trust-badges">
-        <div class="badge-item"><span class="badge-icon">🔒</span><span>Secure Payment</span></div>
-        <div class="badge-item"><span class="badge-icon">🌍</span><span>Global Reach</span></div>
-        <div class="badge-item"><span class="badge-icon">⭐</span><span>Fandom Verified</span></div>
-    </div>
-    <p style="margin-top:40px;">&copy; 2026 Global Hope International. All rights reserved.</p>
-</footer>
-
-<script>
-    function openModal() { document.getElementById('donationModal').style.display = 'flex'; }
-    function closeModal() { document.getElementById('donationModal').style.display = 'none'; }
-    function showForm() {
-        document.getElementById('step-reasons').classList.add('hidden');
-        document.getElementById('step-form').classList.remove('hidden');
-    }
-
-    const form = document.getElementById('sponsorship-form');
-    form.addEventListener("submit", async function(e) {
-        e.preventDefault();
-        const button = document.getElementById('submit-btn');
-        const successMsg = document.getElementById('success-msg');
+    <p><span class="dropcap">W</span>hat
         
-        button.disabled = true;
-        button.innerText = "Sending...";
-
-        const formData = new FormData(form);
-        const object = {};
-        formData.forEach((value, key) => object[key] = value);
-        const json = JSON.stringify(object);
-
-        try {
-            const response = await fetch(form.action, {
-                method: "POST",
-                headers: { "Content-Type": "application/json", "Accept": "application/json" },
-                body: json
-            });
-
-            if (response.ok) {
-                successMsg.style.display = "block";
-                form.reset();
-                setTimeout(closeModal, 3000);
-            } else {
-                const data = await response.json();
-                if (data.errors) {
-                    alert(data.errors.map(error => error.message).join(", "));
-                } else {
-                    alert("Submission failed. Please try again.");
-                }
-            }
-        } catch (error) {
-            alert("Error connecting. Please check your internet.");
-        } finally {
-            button.disabled = false;
-            button.innerText = "Submit Sponsorship";
-        }
-    });
-</script>
-</body>
-    </html>
-    
