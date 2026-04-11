@@ -2,21 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Global Hope | Lee Junho Fandom Impact</title>
     <style>
         :root { --wv-orange: #ff6d00; --text-dark: #333333; --bg-gray: #f8f9fa; --trust-gray: #999; }
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.8; color: var(--text-dark); margin: 0; padding: 0; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.8; color: var(--text-dark); margin: 0; padding: 0; -webkit-tap-highlight-color: rgba(255,109,0,0.2); }
         
-        .corner-banner { position: absolute; top: 0; left: 0; width: 220px; z-index: 1001; }
-        nav { background: #fff; padding: 10px 5%; display: flex; justify-content: flex-end; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 1000; height: 110px; }
+        .corner-banner { position: absolute; top: 0; left: 0; width: 220px; z-index: 1001; pointer-events: none; }
+        nav { background: #fff; padding: 10px 5%; display: flex; justify-content: flex-end; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 1000; height: 110px; gap: 20px; }
         
         .donate-group { display: flex; flex-direction: column; align-items: center; margin-top: 10px; }
-        .circular-text-svg { width: 90px; height: 90px; margin-bottom: -15px; }
+        .circular-text-svg { width: 90px; height: 90px; margin-bottom: -15px; pointer-events: none; }
         .circular-text-svg text { font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; fill: var(--wv-orange); }
         
-        .btn-donate { background: var(--wv-orange); color: #fff !important; padding: 10px 25px; border-radius: 4px; cursor: pointer; border: none; font-weight: bold; transition: 0.3s; text-decoration: none; }
-        .btn-donate:hover { background: #e66200; }
+        .btn-donate { 
+            background: var(--wv-orange); 
+            color: #fff; 
+            padding: 10px 25px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            border: none; 
+            font-weight: bold; 
+            transition: 0.3s; 
+            text-decoration: none; 
+            font-size: 16px;
+            display: inline-block;
+        }
+        .btn-donate:active { background: #e66200; transform: scale(0.98); }
+
+        .lang-selector { position: relative; z-index: 1002; }
+        .lang-btn { 
+            background: transparent; 
+            border: 2px solid var(--wv-orange); 
+            color: var(--wv-orange); 
+            padding: 10px 16px; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px;
+            min-height: 44px;
+        }
+        
+        .lang-dropdown { 
+            display: none; 
+            position: absolute; 
+            top: calc(100% + 8px); 
+            right: 0; 
+            background: white; 
+            border: 2px solid var(--wv-orange); 
+            border-radius: 12px; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15); 
+            min-width: 200px; 
+            z-index: 1004;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        .lang-dropdown.active { display: block; }
+        
+        .lang-option { padding: 14px 20px; cursor: pointer; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #f5f5f5; }
 
         .article-header { max-width: 800px; margin: 60px auto 30px; text-align: center; padding: 0 20px; }
         h1 { font-size: 2.8rem; line-height: 1.2; margin-bottom: 10px; }
@@ -32,22 +77,43 @@
         
         .quote-box { border-left: 4px solid var(--wv-orange); padding: 20px 30px; background: var(--bg-gray); margin: 30px 0; font-style: italic; font-size: 1.2rem; }
 
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-content { background: #fff; padding: 40px; width: 90%; max-width: 500px; border-radius: 12px; position: relative; max-height: 90vh; overflow-y: auto; text-align: center; }
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; }
-        .hidden { display: none; }
+        .modal-overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.85); 
+            z-index: 2000; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content { 
+            background: #fff; 
+            padding: 40px; 
+            width: 90%; 
+            max-width: 500px; 
+            border-radius: 16px; 
+            position: relative; 
+            text-align: center;
+        }
+        .hidden { display: none !important; }
         
-        .package-list { background: var(--bg-gray); padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 0.85rem; text-align: left; }
-        .package-list ul { padding-left: 20px; margin: 5px 0; }
+        .package-list { background: var(--bg-gray); padding: 20px; border-radius: 12px; margin: 20px 0; font-size: 0.9rem; text-align: left; }
+        .package-list ul { padding-left: 20px; margin: 10px 0; }
 
-        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; margin-bottom: 10px; font-size: 16px; }
-        .action-btn { background: var(--wv-orange); color: white; border: none; width: 100%; padding: 18px; margin-top: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; }
-        
-        .trust-badges { display: flex; justify-content: center; gap: 30px; margin-top: 40px; filter: grayscale(100%); opacity: 0.6; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; color: var(--trust-gray); }
-        .badge-item { display: flex; flex-direction: column; align-items: center; }
-        .badge-icon { font-size: 1.5rem; margin-bottom: 5px; }
+        input, select { width: 100%; padding: 14px; border: 2px solid #eee; border-radius: 8px; margin-bottom: 12px; font-size: 16px; box-sizing: border-box; }
+        .action-btn { background: var(--wv-orange); color: white; border: none; width: 100%; padding: 16px; margin-top: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
-        footer { background: #222; color: #fff; padding: 60px 20px; text-align: center; }
+        footer { background: #222; color: #fff; padding: 60px 20px; text-align: center; margin-top: 40px; }
+        .trust-badges { display: flex; justify-content: center; gap: 30px; opacity: 0.6; font-size: 0.7rem; }
+
+        @media (max-width: 768px) {
+            nav { flex-direction: column; height: auto; padding: 15px; gap: 15px; }
+            h1 { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
@@ -55,143 +121,183 @@
 <img src="Screenshot_20260408-193148.png" alt="Banner" class="corner-banner">
 
 <nav>
+    <div class="lang-selector">
+        <button class="lang-btn" id="langBtn" type="button">
+            <span id="current-lang-flag">🇺🇸</span>
+            <span id="current-lang-name">English</span>
+            <span>▼</span>
+        </button>
+        <div class="lang-dropdown" id="langDropdown">
+            <div class="lang-option" data-lang="en"><span>🇺🇸</span> English</div>
+            <div class="lang-option" data-lang="ko"><span>🇰🇷</span> 한국어</div>
+            <div class="lang-option" data-lang="th"><span>🇹🇭</span> ไทย</div>
+            <div class="lang-option" data-lang="ja"><span>🇯🇵</span> 日本語</div>
+            <div class="lang-option" data-lang="zh"><span>🇨🇳</span> 中文</div>
+            <div class="lang-option" data-lang="es"><span>🇪🇸</span> Español</div>
+            <div class="lang-option" data-lang="fr"><span>🇫🇷</span> Français</div>
+            <div class="lang-option" data-lang="de"><span>🇩🇪</span> Deutsch</div>
+            <div class="lang-option" data-lang="pt"><span>🇧🇷</span> Português</div>
+            <div class="lang-option" data-lang="vi"><span>🇻🇳</span> Tiếng Việt</div>
+            <div class="lang-option" data-lang="id"><span>🇮🇩</span> Bahasa Indonesia</div>
+        </div>
+    </div>
+
     <div class="donate-group">
         <svg class="circular-text-svg" viewBox="0 0 100 100">
             <defs><path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" /></defs>
-            <text><textPath xlink:href="#circlePath">Hope Joy Justice</textPath></text>
+            <text><textPath xlink:href="#circlePath" id="circular-text" data-i18n="circularText">Hope Joy Justice</textPath></text>
         </svg>
-        <button class="btn-donate" onclick="openModal()">Donate Now</button>
+        <button class="btn-donate" data-i18n="donateNow">Donate Now</button>
     </div>
 </nav>
 
 <header class="article-header">
-    <span style="color:var(--wv-orange); font-weight:bold; text-transform:uppercase; letter-spacing: 1px;">Global Community Impact</span>
-    <h1>Lee Junho Fandom Rises to the Occasion to Help Transform Children's Lives Worldwide</h1>
+    <span style="color:var(--wv-orange); font-weight:bold; text-transform:uppercase;" data-i18n="subtitle">Global Community Impact</span>
+    <h1 data-i18n="title">Lee Junho Fandom Rises to the Occasion to Help Transform Children's Lives Worldwide</h1>
 </header>
 
 <div class="progress-container">
     <div class="progress-label">
-        <span>Raised: $6,400</span>
-        <span>Goal: $10,000</span>
+        <span data-i18n="raised">Raised: $6,400</span>
+        <span data-i18n="goal">Goal: $10,000</span>
     </div>
-    <div class="progress-bg">
-        <div class="progress-fill"></div>
-    </div>
+    <div class="progress-bg"><div class="progress-fill"></div></div>
 </div>
 
 <img src="1772889370017.jpg" alt="Lee Junho Impact" class="featured-image">
 
 <main class="content-container">
-    <p><span class="dropcap">W</span>hat started as a celebration of a beloved artist has blossomed into a global movement of compassion. Members of the Lee Junho fandom have come together across international borders to support a shared mission: ensuring every child, regardless of where they are born, has the opportunity to thrive.</p>
-    <div class="quote-box">"Our goal was to reflect the kindness we see in Lee Junho by extending a helping hand to children across every continent."</div>
+    <p data-i18n="intro"><span class="dropcap">W</span>hat started as a celebration of a beloved artist has blossomed into a global movement of compassion. Members of the Lee Junho fandom have come together across international borders to support a shared mission: ensuring every child, regardless of where they are born, has the opportunity to thrive.</p>
+    <div class="quote-box" data-i18n="quote">"Our goal was to reflect the kindness we see in Lee Junho by extending a helping hand to children across every continent."</div>
     <div style="text-align: center; margin-top: 40px;">
-        <button class="btn-donate" style="padding: 15px 40px; font-size: 1.1rem;" onclick="openModal()">Sponsor a Child Today</button>
+        <button class="btn-donate" style="padding: 15px 40px; font-size: 1.1rem;" data-i18n="sponsorBtn">Sponsor a Child Today</button>
     </div>
 </main>
 
 <div class="modal-overlay" id="donationModal">
     <div class="modal-content">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <button id="closeModal" style="position:absolute; right:15px; top:10px; background:none; border:none; font-size:2rem; cursor:pointer; color:#999;">&times;</button>
         
         <div id="step-reasons">
-            <h2 style="color:var(--wv-orange); margin-top:0;">Why Sponsor?</h2>
+            <h2 style="color:var(--wv-orange);" data-i18n="whySponsor">Why Sponsor?</h2>
             <div class="package-list">
-                <strong>Your Digital Welcome Kit includes:</strong>
+                <strong data-i18n="kitIncludes">Your Digital Welcome Kit includes:</strong>
                 <ul>
-                    <li>Personalized Certificate of Appreciation</li>
-                    <li>Detailed Community Impact Profile</li>
-                    <li>Quarterly Growth & Health Reports</li>
-                    <li>Fandom Community Badge</li>
+                    <li data-i18n="cert">Personalized Certificate of Appreciation</li>
+                    <li data-i18n="profile">Detailed Community Impact Profile</li>
+                    <li data-i18n="reports">Quarterly Growth & Health Reports</li>
+                    <li data-i18n="badge">Fandom Community Badge</li>
                 </ul>
             </div>
-            <button class="action-btn" onclick="showForm()">Proceed to Donation Form</button>
+            <button class="action-btn" id="proceedBtn" data-i18n="proceed">Proceed to Donation Form</button>
         </div>
 
         <div id="step-form" class="hidden">
-            <h2 style="color:var(--wv-orange); margin-top:0;">Sponsorship Details</h2>
+            <h2 style="color:var(--wv-orange);" data-i18n="formTitle">Sponsorship Details</h2>
             <form id="my-form" action="https://formspree.io/f/xdkwlwlj" method="POST">
                 <input type="text" name="full_name" placeholder="Full Name" required>
                 <input type="email" name="email" placeholder="Email Address" required>
                 <input type="text" name="country" placeholder="Country" required>
-                <input type="number" name="amount" placeholder="Amount ($)" required>
+                <input type="number" name="amount" placeholder="Amount (min $300)" min="300" required>
                 <select name="method" required>
-                    <option value="" disabled selected>Payment Method</option>
+                    <option value="" disabled selected data-i18n="paymentMethod">Payment Method</option>
                     <option value="Apple Pay">Apple Pay</option>
                     <option value="Apple Card">Apple Card</option>
-                    <option value="Bank">Bank Transfer</option>
+                    <option value="Bank" data-i18n="bankTransfer">Bank Transfer</option>
                 </select>
-                <button type="submit" class="action-btn" id="submit-button">Submit Sponsorship</button>
+                <button type="submit" class="action-btn" data-i18n="submitBtn">Submit Sponsorship</button>
             </form>
-            <p id="my-form-status" style="color:red; font-size: 14px; margin-top: 10px;"></p>
         </div>
 
         <div id="thank-you" class="hidden">
-            <h2 style="color:green;">Success!</h2>
-            <p>Your details have been sent. Please check your email inbox shortly.</p>
-            <button class="action-btn" onclick="closeModal()">Close</button>
+            <h2 style="color:green;" data-i18n="successTitle">Success!</h2>
+            <p data-i18n="successMsg">Your details have been sent. Please check your email inbox shortly.</p>
         </div>
     </div>
 </div>
 
 <footer>
     <div class="trust-badges">
-        <div class="badge-item"><span class="badge-icon">🔒</span><span>Secure Payment</span></div>
-        <div class="badge-item"><span class="badge-icon">🌍</span><span>Global Reach</span></div>
-        <div class="badge-item"><span class="badge-icon">⭐</span><span>Fandom Verified</span></div>
+        <span data-i18n="securePay">🔒 Secure Payment</span>
+        <span data-i18n="globalReach">🌍 Global Reach</span>
+        <span data-i18n="verified">⭐ Fandom Verified</span>
     </div>
     <p style="margin-top:40px;">&copy; 2026 Global Hope International. All rights reserved.</p>
 </footer>
 
 <script>
-    function openModal() { document.getElementById('donationModal').style.display = 'flex'; }
-    function closeModal() { document.getElementById('donationModal').style.display = 'none'; }
-    function showForm() {
+    const translations = {
+        en: {
+            donateNow: "Donate Now", subtitle: "Global Community Impact", title: "Lee Junho Fandom Rises to the Occasion to Help Transform Children's Lives Worldwide", raised: "Raised: $6,400", goal: "Goal: $10,000", intro: '<span class="dropcap">W</span>hat started as a celebration of a beloved artist has blossomed into a global movement of compassion...', quote: '"Our goal was to reflect the kindness we see in Lee Junho by extending a helping hand to children across every continent."', sponsorBtn: "Sponsor a Child Today", whySponsor: "Why Sponsor?", kitIncludes: "Your Digital Welcome Kit includes:", cert: "Personalized Certificate of Appreciation", profile: "Detailed Community Impact Profile", reports: "Quarterly Growth & Health Reports", badge: "Fandom Community Badge", proceed: "Proceed to Donation Form", formTitle: "Sponsorship Details", paymentMethod: "Payment Method", bankTransfer: "Bank Transfer", submitBtn: "Submit Sponsorship", successTitle: "Success!", successMsg: "Your details have been sent. Please check your email inbox shortly.", securePay: "🔒 Secure Payment", globalReach: "🌍 Global Reach", verified: "⭐ Fandom Verified", circularText: "Hope Joy Justice"
+        },
+        th: {
+            donateNow: "บริจาคตอนนี้", subtitle: "ผลกระทบต่อชุมชนทั่วโลก", title: "แฟนคลับ อีจุนโฮ ร่วมแรงร่วมใจช่วยเปลี่ยนชีวิตเด็กๆ ทั่วโลก", raised: "ยอดบริจาค: $6,400", goal: "เป้าหมาย: $10,000", intro: '<span class="dropcap">สิ</span>งที่เริ่มต้นจากการเฉลิมฉลองให้กับศิลปินอันเป็นที่รัก ได้เบ่งบานกลายเป็นการเคลื่อนไหวแห่งความเมตตาระดับโลก...', quote: '"เป้าหมายของเราคือการสะท้อนถึงความใจดีที่เราเห็นในตัวอีจุนโฮ โดยการหยิบยื่นความช่วยเหลือไปยังเด็กๆ ในทุกทวีป"', sponsorBtn: "อุปการะเด็กวันนี้", whySponsor: "ทำไมต้องอุปการะ?", kitIncludes: "ชุดต้อนรับดิจิทัลของคุณประกอบด้วย:", cert: "เกียรติบัตรแสดงความขอบคุณ", profile: "ข้อมูลรายละเอียดผลกระทบ", reports: "รายงานสุขภาพรายไตรมาส", badge: "ตราสัญลักษณ์ชุมชน", proceed: "ไปที่แบบฟอร์มการบริจาค", formTitle: "รายละเอียดการอุปการะ", paymentMethod: "วิธีการชำระเงิน", bankTransfer: "โอนเงินผ่านธนาคาร", submitBtn: "ส่งข้อมูลการอุปการะ", successTitle: "สำเร็จ!", successMsg: "ส่งข้อมูลเรียบร้อยแล้ว โปรดตรวจสอบอีเมลของคุณ", securePay: "🔒 การชำระเงินที่ปลอดภัย", globalReach: "🌍 การเข้าถึงทั่วโลก", verified: "⭐ ยืนยันโดยแฟนคลับ", circularText: "ความหวัง ความสุข"
+        },
+        ko: {
+            donateNow: "지금 기부하기", subtitle: "글로벌 커뮤니ติ 임팩트", title: "이준호 팬덤, 전 세계 아동들의 삶을 변화시키기 위해 나서다", raised: "모금액: $6,400", goal: "목표: $10,000", intro: '<span class="dropcap">사</span>랑하는 아티스트를 축하하는 것에서 시작된 이 활동은 전 세계적인 연민의 물결로 발전했습니다...', quote: '"우리의 목표는 대륙을 넘어 아이들에게 도움의 손길을 내밈으로써 이준호에게서 보는 친절함을 반영하는 것이었습니다."', sponsorBtn: "오늘 아동 후원하기", whySponsor: "왜 후원하나요?", kitIncludes: "디지털 웰컴 키트 포함 사항:", cert: "개인화된 감사장", profile: "상세한 커뮤니티 임팩트 프로필", reports: "분기별 성장 보고서", badge: "팬덤 커뮤니티 배지", proceed: "기부 양식으로 진행", formTitle: "후원 세부정보", paymentMethod: "결제 방법", bankTransfer: "은행 송금", submitBtn: "후원 제출", successTitle: "성공!", successMsg: "세부정보가 전송되었습니다.", securePay: "🔒 안전한 결제", globalReach: "🌍 글로벌 도달", verified: "⭐ 팬덤 인증", circularText: "희망 기쁨 정의"
+        }
+    };
+
+    const langBtn = document.getElementById('langBtn');
+    const langDropdown = document.getElementById('langDropdown');
+    const modal = document.getElementById('donationModal');
+
+    langBtn.onclick = () => langDropdown.classList.toggle('active');
+
+    document.querySelectorAll('.btn-donate').forEach(btn => {
+        btn.onclick = () => modal.classList.add('active');
+    });
+
+    document.getElementById('closeModal').onclick = () => {
+        modal.classList.remove('active');
+        document.getElementById('step-reasons').classList.remove('hidden');
+        document.getElementById('step-form').classList.add('hidden');
+    };
+
+    document.getElementById('proceedBtn').onclick = () => {
         document.getElementById('step-reasons').classList.add('hidden');
         document.getElementById('step-form').classList.remove('hidden');
-    }
+    };
 
-    var form = document.getElementById("my-form");
-    
-    async function handleSubmit(event) {
-      event.preventDefault();
-      var status = document.getElementById("my-form-status");
-      var button = document.getElementById("submit-button");
-      var formDiv = document.getElementById("step-form");
-      var successDiv = document.getElementById("thank-you");
-      
-      button.disabled = true;
-      button.innerText = "Sending...";
-      
-      var data = new FormData(event.target);
-      
-      fetch(event.target.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      }).then(response => {
-        if (response.ok) {
-          formDiv.classList.add("hidden");
-          successDiv.classList.remove("hidden");
-          form.reset();
-        } else {
-          response.json().then(data => {
-            if (data.errors) {
-              status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
-            } else {
-              status.innerHTML = "Oops! Submission failed.";
-            }
-          })
-        }
-      }).catch(error => {
-        status.innerHTML = "Connection error. Please try again.";
-      }).finally(() => {
-        button.disabled = false;
-        button.innerText = "Submit Sponsorship";
-      });
-    }
-    form.addEventListener("submit", handleSubmit);
-</script>
-
-</body>
-        </html>
+    document.querySelectorAll('.lang-option').forEach(opt => {
+        opt.onclick = () => {
+            const lang = opt.dataset.lang;
+            const t = translations[lang] || translations.en;
             
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.innerHTML = t[key];
+            });
+
+            document.getElementById('current-lang-flag').textContent = opt.querySelector('span').textContent;
+            document.getElementById('current-lang-name').textContent = opt.textContent.replace(opt.querySelector('span').textContent, '').trim();
+            langDropdown.classList.remove('active');
+        };
+    });
+
+    const form = document.getElementById("my-form");
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        
+        // Final sanity check for amount
+        const amount = form.querySelector('[name="amount"]').value;
+        if (amount < 300) {
+            alert("Minimum donation is $300");
+            return;
+        }
+
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+            document.getElementById('step-form').classList.add('hidden');
+            document.getElementById('thank-you').classList.remove('hidden');
+            form.reset();
+        }
+    };
+</script>
+</body>
+                                                                                </html>
+    
